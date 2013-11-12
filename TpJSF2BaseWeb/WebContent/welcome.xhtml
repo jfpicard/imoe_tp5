@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/layout/simpleLayout.xhtml">
+
+    <ui:define name="header">
+        <h:graphicImage styleClass="logo" value="resources/img/logo.png" height="70" />
+        <h:outputText value="Application d'administration de comptes utilisateurs" />
+    </ui:define>
+
+    <ui:define name="content">
+        <rich:tabPanel>
+            <rich:tab header="Utilisateurs">
+                <!-- Panel pour la gestion des utilisateurs -->
+            </rich:tab>
+
+            <rich:tab header="Groupes">
+                <h:panelGrid columns="2">
+                	<h:panelGroup>
+                		<!-- liste -->
+                		<rich:panel header="liste des groupes">
+                			
+                		</rich:panel><br/>
+                		<h:commandLink value="Ajouter un groupe" />
+                	</h:panelGroup>
+                	<h:panelGroup>
+                		<!-- edition -->
+                	</h:panelGroup>
+                </h:panelGrid>
+            </rich:tab>
+        </rich:tabPanel>
+    </ui:define>
+
+    <ui:define name="footer">
+        <h:outputText value="TP 5 - JSF 2 et CDI" />
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:insert name="metadata"/>
+<h:head>
+	<title>
+	   <ui:insert name="windowTitle">Administration des comptes utilisateurs</ui:insert>
+	</title>
+</h:head>
+<h:body>
+    <h:outputStylesheet library="css" name="style.css" />
+    <h:form>
+       <h:panelGroup styleClass="header" layout="block">
+           <ui:insert name="header" />
+       </h:panelGroup>
+       <h:panelGroup styleClass="content" layout="block">
+           <h:messages />
+
+           <ui:insert name="content" />
+       </h:panelGroup>
+
+       <h:panelGroup styleClass="footer" layout="block">
+           <ui:insert name="footer" />
+       </h:panelGroup>
+   </h:form>
+</h:body>
+</html>

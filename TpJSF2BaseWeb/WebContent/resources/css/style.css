@@ -1,0 +1,94 @@
+.header {
+	background: url("img/toplogobg.jpg.xhtml") repeat-x;
+    height: 60px;
+    padding-top: 20px;
+    padding-left: 220px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header img.logo {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+
+.content {
+	min-height: 300px;
+}
+
+.footer {
+	background: url("img/toplogobg.jpg.xhtml") repeat-x;
+	height: 20px;
+	color: white;
+	font-size: 13px;
+	text-align: center;
+}
+
+.panelContent {
+	width: 100%;
+}
+
+.panelContent td {
+	width: 50%;
+	vertical-align: top;
+}
+
+.actionFooter td {
+	padding-top: 15px;
+    padding-left: 50px;
+}
+
+
+.loginForm {
+    margin: 50px auto auto;
+    width: 300px;
+}
+
+.loginForm .actionFooter td {
+    padding-left: 95px;
+}
+
+.logoutLink {
+	position: absolute;
+    right: 15px;
+    top: 94px;
+    z-index: 500;
+}
+ 
+.panelEdition td {
+    width: auto;
+}
+
+label.mandatory:after {
+    content: " *";
+    color: #CC5555;
+    font-weight: bold;
+}
+
+.errorMsg {
+	font-size: 10px;
+	color:red;
+}
+
+.globalErrors {
+    background-color: #FF3030;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.globalInfos {
+    background-color: #008000;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.ajaxIndicateur {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    z-index: 999;
+}
