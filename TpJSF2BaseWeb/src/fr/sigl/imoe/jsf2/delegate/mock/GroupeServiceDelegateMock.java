@@ -15,9 +15,10 @@ import fr.sigl.imoe.jsf2.dto.Groupe;
 public class GroupeServiceDelegateMock implements GroupeServiceDelegate 
 {
 	/**
-	 * 
+	 * Generated serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private List<Groupe> groupes = new ArrayList<Groupe>();
 
 	private int identifiant = 0;

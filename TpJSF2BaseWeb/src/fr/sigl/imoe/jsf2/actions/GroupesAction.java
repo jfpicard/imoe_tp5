@@ -17,7 +17,7 @@ public class GroupesAction implements Serializable
 {
 
 	/**
-	 * 
+	 * Generated serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
 

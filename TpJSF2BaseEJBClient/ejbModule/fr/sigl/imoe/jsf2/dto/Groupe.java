@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Groupe implements Serializable 
 {
-
+	
 	/**
-	 * 
+	 * Generated serial version UID.
 	 */
 	private static final long serialVersionUID = 1L;
 
