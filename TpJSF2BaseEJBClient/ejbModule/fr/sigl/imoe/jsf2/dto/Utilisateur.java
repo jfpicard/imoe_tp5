@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * DTO représentatn l'utilisateur
+ * DTO représentation d'un utilisateur
+ * 
  * @author JP
- *
  */
 public class Utilisateur implements Serializable 
 {
