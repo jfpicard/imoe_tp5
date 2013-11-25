@@ -21,23 +21,22 @@
 			</rich:tab>
 
 			<rich:tab header="Groupes">
-				<h:panelGrid columns="2" styleClass=panelContent>
+				<h:panelGrid columns="2" styleClass="panelContent">
 					<h:panelGroup>
 						<!-- liste -->
 						<rich:panel header="liste des groupes">
-							<rich:dataTable var"groupe" value="#{groupesAction.groupes}">
+							<rich:dataTable var="groupe" value="#{groupesAction.groupes}">
 								<rich:column>
 									<f:facet name="header">Nom</f:facet>
-									<h: outputText value="#{groupe.nom}">
+									<h:outputText value="#{groupe.nom}"/>
 								</rich:column>
 								<rich:column>
 									<f:facet name="header">Description</f:facet>
-									<h: outputText value="#{groupe.description}">
+									<h:outputText value="#{groupe.description}"/>
 								</rich:column>
 								<rich:column>
 									<h:commandLink action="#{groupesAction.edit(groupe.id)}">
-										<h:graphicImage styleClass="logo"
-											value="resources/img/edit.png" >
+										<h:graphicImage styleClass="logo" value="resources/img/edit.png" />
 									</h:commandLink>
 								</rich:column>
 							</rich:dataTable>
@@ -47,7 +46,7 @@
 					</h:panelGroup>
 					<h:panelGroup>
 						<!-- edition -->
-						<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition">
+						<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition}">
 							<h:outputLabel value="Nom :" for="groupeNom" />
 							<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom" />
 
