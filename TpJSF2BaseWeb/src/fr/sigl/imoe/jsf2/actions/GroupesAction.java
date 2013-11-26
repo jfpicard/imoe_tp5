@@ -26,14 +26,14 @@ public class GroupesAction implements Serializable
 	
 	private List<Groupe> groupes;
 	
-	private Groupe groupeEdition;
+	private Groupe groupeEnEdition;
 	
-	public Groupe getGroupeEdition() {
-		return groupeEdition;
+	public Groupe getGroupeEnEdition() {
+		return groupeEnEdition;
 	}
 
-	public void setGroupeEdition(Groupe groupeEdition) {
-		this.groupeEdition = groupeEdition;
+	public void setGroupeEnEdition(Groupe groupeEnEdition) {
+		this.groupeEnEdition = groupeEnEdition;
 	}
 
 	@PostConstruct
@@ -42,29 +42,29 @@ public class GroupesAction implements Serializable
 		groupes = service.listerTousGroupe();
 	}
 	
-	public List<Groupe> getGroupe()
+	public List<Groupe> getGroupes()
 	{
 		return groupes;
 	}
 	
 	public String edit(Integer id)
 	{
-		groupeEdition = service.retrouverGroupePParId(id);
+		groupeEnEdition = service.retrouverGroupePParId(id);
 		return null;
 	}
 	
 	public String validerEdition()
 	{
-		service.sauvegarderGroupe(groupeEdition);
+		service.sauvegarderGroupe(groupeEnEdition);
 		groupes = service.listerTousGroupe();
-		groupeEdition = null;
+		groupeEnEdition = null;
 		return null;
 	}
 	
 	public String annulerEdition()
 	{
 		groupes = service.listerTousGroupe();
-		groupeEdition = null;
+		groupeEnEdition = null;
 		return null;
 	}
 }

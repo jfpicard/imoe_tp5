@@ -22,6 +22,7 @@
 
 			<rich:tab header="Groupes">
 				<h:panelGrid columns="2" styleClass="panelContent">
+					
 					<h:panelGroup>
 						<!-- liste -->
 						<rich:panel header="liste des groupes">
@@ -44,20 +45,22 @@
 						<br />
 						<h:commandLink value="Ajouter un groupe" />
 					</h:panelGroup>
+					
 					<h:panelGroup>
 						<!-- edition -->
 						<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition}">
 							<h:outputLabel value="Nom :" for="groupeNom" />
 							<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom" />
-
 							<h:outputLabel value="Description :" for="groupeDescription" />
 							<h:inputTextarea value="#{groupesAction.groupeEnEdition.description}" id="groupeDescription" />
+							
+							<h:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
+							<h:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
 						</rich:panel>
 					</h:panelGroup>
+					
 				</h:panelGrid>
 			</rich:tab>
-			<h:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
-			<h:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
 		</rich:tabPanel>
 	</ui:define>
 
