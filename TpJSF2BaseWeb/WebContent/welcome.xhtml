@@ -50,52 +50,94 @@
 					<h:panelGroup>
 					<!-- Edition des utilisateurs -->
 						<rich:panel header="Edition d'un utilisateur" rendered="#{not empty utilisateursAction.utilisateurEnEdition}">
-							<h:outputLabel value="Login :" for="userLogin" />
-							<h:inputText value="#{utilisateursAction.utilisateurEnEdition.login}" id="userLogin" />
-							<br />
-							
-							<h:outputLabel value="Password :" for="userPassword"/>
-							<h:inputSecret value="#{utilisateursAction.utilisateurEnEdition.password}" id="userPassword"/>
-							<br />
-							
-							<h:outputLabel value="Email :" for="userEmail"/>
-							<h:inputText value="#{utilisateursAction.utilisateurEnEdition.email}" id="userEmail"/>
-							<br />
-							
-							<h:outputLabel value="Groupes :" for="userGroupes" />
-							<h:selectManyListbox value="#{utilisateursAction.utilisateurEnEdition.groupes}" id="userGroupes">
-								<f:selectItems value="#{groupesAction.groupes}" var="g" itemLabel="#{g.nom}" itemValue="#{g}"/>	
-								<f:converter converterId="groupeConverter"/>
-							</h:selectManyListbox>
-							<br />
-							
-							<h:commandButton value="Valider" action="#{utilisateursAction.validerEdition()}" />
-							<h:commandButton value="Annuler" action="#{utilisateursAction.annulerEdition()}" immediate="true"/>
+							<h:panelGrid columns="2">							
+								<h:outputLabel value="Login :" for="userLogin" />
+								<h:panelGrid columns="2">							
+									<h:inputText value="#{utilisateursAction.utilisateurEnEdition.login}" id="userLogin">
+										<f:validateRequired/>
+										<f:validateLength minimum="3" maximum="25"/>
+										<f:validator validatorId="differentLoginPasswordValidator"/>
+										<f:attribute name="userPassword" value="#{userPassword}" />
+									</h:inputText>
+									<h:message for="userLogin" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:outputLabel value="Password :" for="userPassword"/>
+								<h:panelGrid columns="2">							
+									<h:inputSecret value="#{utilisateursAction.utilisateurEnEdition.password}" id="userPassword" binding="#{userPassword}" required="true">
+										<f:validateRequired/>
+										<f:validateLength minimum="5" maximum="15"/>								
+									</h:inputSecret>
+									<h:message for="userPassword" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:outputLabel value="Email :" for="userEmail"/>
+								<h:panelGrid columns="2">							
+									<h:inputText value="#{utilisateursAction.utilisateurEnEdition.email}" id="userEmail" required="true">
+										<f:validator validatorId="mailValidator"/>
+									</h:inputText>
+									<h:message for="userEmail" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:outputLabel value="Groupes :" for="userGroupes" />
+								<h:panelGrid columns="2">
+									<h:selectManyListbox value="#{utilisateursAction.utilisateurEnEdition.groupes}" id="userGroupes">
+										<f:selectItems value="#{groupesAction.groupes}" var="g" itemLabel="#{g.nom}" itemValue="#{g}"/>	
+										<f:converter converterId="groupeConverter"/>
+										<f:validator validatorId="userGroupsValidator"/>
+									</h:selectManyListbox>
+									<h:message for="userGroupes" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:commandButton value="Valider" action="#{utilisateursAction.validerEdition()}" />
+								<h:commandButton value="Annuler" action="#{utilisateursAction.annulerEdition()}" immediate="true"/>
+							</h:panelGrid>					
 						</rich:panel>
 						
 						<!-- Ajout d'un utilisateur -->
 						<rich:panel header="Ajout d'un utilisateur" rendered="#{not empty utilisateursAction.utilisateurEnAddition}">
-							<h:outputLabel value="Login :" for="userToAddLogin" />
-							<h:inputText value="#{utilisateursAction.utilisateurEnAddition.login}" id="userToAddLogin" />
-							<br />
-							
-							<h:outputLabel value="Password :" for="userToAddPassword"/>
-							<h:inputSecret value="#{utilisateursAction.utilisateurEnAddition.password}" id="userToAddPassword"/>
-							<br />
-							
-							<h:outputLabel value="Email :" for="userToAddEmail"/>
-							<h:inputText value="#{utilisateursAction.utilisateurEnAddition.email}" id="userToAddEmail"/>
-							<br />
-							
-							<h:outputLabel value="Groupes :" for="userToAddGroupes" />
-							<h:selectManyListbox value="#{utilisateursAction.utilisateurEnAddition.groupes}" id="userToAddGroupes">
-								<f:selectItems value="#{groupesAction.groupes}" var="g" itemLabel="#{g.nom}" itemValue="#{g}"/>	
-								<f:converter converterId="groupeConverter"/>
-							</h:selectManyListbox>
-							<br />
-							
-							<h:commandButton value="Valider" action="#{utilisateursAction.validerAdd()}" />
-							<h:commandButton value="Annuler" action="#{utilisateursAction.annulerAdd()}" immediate="true"/>
+							<h:panelGrid columns="2">							
+								<h:outputLabel value="Login :" for="userToAddLogin" />
+								<h:panelGrid columns="2">								
+									<h:inputText value="#{utilisateursAction.utilisateurEnAddition.login}" id="userToAddLogin">
+										<f:validateRequired/>
+										<f:validateLength minimum="3" maximum="25"/>
+										<f:validator validatorId="differentLoginPasswordValidator"/>
+										<f:attribute name="userToAddPassword" value="#{userToAddPassword}" />
+									</h:inputText>
+									<h:message for="userToAddLogin" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:outputLabel value="Password :" for="userToAddPassword"/>
+								<h:panelGrid columns="2">								
+									<h:inputSecret value="#{utilisateursAction.utilisateurEnAddition.password}" id="userToAddPassword" binding="#{userToAddPassword}" required="true">
+										<f:validateRequired/>
+										<f:validateLength minimum="5" maximum="15"/>								
+									</h:inputSecret>
+									<h:message for="userToAddPassword" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:outputLabel value="Email :" for="userToAddEmail"/>
+								<h:panelGrid columns="2">							
+									<h:inputText value="#{utilisateursAction.utilisateurEnAddition.email}" id="userToAddEmail" required="true">
+										<f:validator validatorId="mailValidator"/>
+									</h:inputText>
+									<h:message for="userToAddEmail" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:outputLabel value="Groupes :" for="userToAddGroupes" />
+								<h:panelGrid columns="2">
+									<h:selectManyListbox value="#{utilisateursAction.utilisateurEnAddition.groupes}" id="userToAddGroupes">
+										<f:selectItems value="#{groupesAction.groupes}" var="g" itemLabel="#{g.nom}" itemValue="#{g}"/>	
+										<f:converter converterId="groupeConverter"/>
+										<f:validator validatorId="userGroupsValidator"/>
+									</h:selectManyListbox>
+									<h:message for="userToAddGroupes" styleClass="errorMsg"/>
+								</h:panelGrid>
+								
+								<h:commandButton value="Valider" action="#{utilisateursAction.validerAdd()}" />
+								<h:commandButton value="Annuler" action="#{utilisateursAction.annulerAdd()}" immediate="true"/>
+							</h:panelGrid>						
 						</rich:panel>
 					</h:panelGroup>
 				
@@ -131,30 +173,50 @@
 					<h:panelGroup>
 						<!-- edition -->
 						<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition}">
-							<h:outputLabel value="Nom :" for="groupeNom" />
-							<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom" />
-							<br/>
+							<h:panelGrid columns="2">
 							
-							<h:outputLabel value="Description :" for="groupeDescription" />
-							<h:inputTextarea value="#{groupesAction.groupeEnEdition.description}" id="groupeDescription" />
-							<br />
-														
-							<h:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
-							<h:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
+								<h:outputLabel value="Nom :" for="groupeNom" />
+								<h:panelGrid columns="2">
+									<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom">
+										<f:validateRequired />
+										<f:validateLength minimum="3" maximum="25" />
+									</h:inputText>
+									<h:message styleClass="errorMsg" for="groupeNom" />
+								</h:panelGrid>
+								
+								<h:outputLabel value="Description :" for="groupeDescription" />
+								<h:panelGrid columns="2">
+									<h:inputTextarea value="#{groupesAction.groupeEnEdition.description}" id="groupeDescription" required="true" requiredMessage="La description est obligatoire" />
+									<h:message styleClass="errorMsg" for="groupeDescription" />
+								</h:panelGrid>
+															
+								<h:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
+								<h:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
+
+							</h:panelGrid>
 						</rich:panel>
 
 						<!-- Ajout d'un groupe -->
 						<rich:panel header="Ajout d'un groupe" rendered="#{not empty groupesAction.groupeEnAddition}">
-							<h:outputLabel value="Nom :" for="groupeToAddNom" />
-							<h:inputText value="#{groupesAction.groupeEnAddition.nom}" id="groupeToAddNom" />
-							<br/>
-							
-							<h:outputLabel value="Description :" for="groupeToAddDescription" />
-							<h:inputTextarea value="#{groupesAction.groupeEnAddition.description}" id="groupeToAddDescription" />
-							<br />
-														
-							<h:commandButton value="Valider" action="#{groupesAction.validerAdd()}" />
-							<h:commandButton value="Annuler" action="#{groupesAction.annulerAdd()}" immediate="true"/>
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Nom :" for="groupeToAddNom" />
+								<h:panelGrid columns="2">								
+									<h:inputText value="#{groupesAction.groupeEnAddition.nom}" id="groupeToAddNom">
+										<f:validateRequired />
+										<f:validateLength minimum="3" maximum="25" />
+									</h:inputText>
+									<h:message styleClass="errorMsg" for="groupeToAddNom" />
+								</h:panelGrid>
+								
+								<h:outputLabel value="Description :" for="groupeToAddDescription" />
+								<h:panelGrid columns="2">								
+									<h:inputTextarea value="#{groupesAction.groupeEnAddition.description}" id="groupeToAddDescription" required="true" requiredMessage="La description est obligatoire"/>
+									<h:message styleClass="errorMsg" for="groupeToAddDescription" />								
+								</h:panelGrid>
+															
+								<h:commandButton value="Valider" action="#{groupesAction.validerAdd()}" />
+								<h:commandButton value="Annuler" action="#{groupesAction.annulerAdd()}" immediate="true"/>
+							</h:panelGrid>
 						</rich:panel>
 					</h:panelGroup>
 					
