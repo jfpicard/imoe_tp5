@@ -20,6 +20,7 @@
 				
 					<h:panelGroup>
 					<!-- Liste des utilisateurs -->
+						<a4j:outputPanel id="listUserPanel" layout="block">
 						<rich:panel header="liste des utilisateurs">
 							<rich:dataTable var="utilisateur" value="#{utilisateursAction.utilisateurs}">
 								<rich:column>
@@ -37,18 +38,20 @@
 									</ui:repeat>
 								</rich:column>
 								<rich:column>
-									<h:commandLink action="#{utilisateursAction.edit(utilisateur.id)}">
+									<a4j:commandLink render="editUserPanel" execute="#{utilisateursAction.edit(utilisateur.id)}">
 										<h:graphicImage styleClass="logo" value="resources/img/edit.png" />
-									</h:commandLink>
+									</a4j:commandLink>
 								</rich:column>
 							</rich:dataTable>
 						</rich:panel>
+						</a4j:outputPanel>
 						<br />
-						<h:commandLink value="Ajouter un utilisateur" action="#{utilisateursAction.add()}"/>
+						<a4j:commandLink value="Ajouter un utilisateur" render="addUserPanel" execute="#{utilisateursAction.add()}"/>
 					</h:panelGroup>
 					
 					<h:panelGroup>
 					<!-- Edition des utilisateurs -->
+						<a4j:outputPanel id="editUserPanel" layout="block">
 						<rich:panel header="Edition d'un utilisateur" rendered="#{not empty utilisateursAction.utilisateurEnEdition}">
 							<h:panelGrid columns="2">							
 								<h:outputLabel value="Login :" for="userLogin" />
@@ -89,12 +92,16 @@
 									<h:message for="userGroupes" styleClass="errorMsg"/>
 								</h:panelGrid>
 								
-								<h:commandButton value="Valider" action="#{utilisateursAction.validerEdition()}" />
+								<h:commandButton value="Valider" action="#{utilisateursAction.validerEdition()}">
+									<a4j:ajax render="listUserPanel"/>
+								</h:commandButton>
 								<h:commandButton value="Annuler" action="#{utilisateursAction.annulerEdition()}" immediate="true"/>
 							</h:panelGrid>					
 						</rich:panel>
+						</a4j:outputPanel>
 						
 						<!-- Ajout d'un utilisateur -->
+						<a4j:outputPanel id="addUserPanel" layout="block">
 						<rich:panel header="Ajout d'un utilisateur" rendered="#{not empty utilisateursAction.utilisateurEnAddition}">
 							<h:panelGrid columns="2">							
 								<h:outputLabel value="Login :" for="userToAddLogin" />
@@ -139,6 +146,7 @@
 								<h:commandButton value="Annuler" action="#{utilisateursAction.annulerAdd()}" immediate="true"/>
 							</h:panelGrid>						
 						</rich:panel>
+						</a4j:outputPanel>
 					</h:panelGroup>
 				
 				</h:panelGrid>
@@ -149,75 +157,79 @@
 					
 					<h:panelGroup>
 						<!-- Liste des groupes -->
-						<rich:panel header="liste des groupes">
-							<rich:dataTable var="groupe" value="#{groupesAction.groupes}">
-								<rich:column>
-									<f:facet name="header">Nom</f:facet>
-									<h:outputText value="#{groupe.nom}"/>
-								</rich:column>
-								<rich:column>
-									<f:facet name="header">Description</f:facet>
-									<h:outputText value="#{groupe.description}"/>
-								</rich:column>
-								<rich:column>
-									<h:commandLink action="#{groupesAction.edit(groupe.id)}">
-										<h:graphicImage styleClass="logo" value="resources/img/edit.png" />
-									</h:commandLink>
-								</rich:column>
-							</rich:dataTable>
-						</rich:panel>
+							<rich:panel header="liste des groupes">
+								<rich:dataTable var="groupe" value="#{groupesAction.groupes}">
+									<rich:column>
+										<f:facet name="header">Nom</f:facet>
+										<h:outputText value="#{groupe.nom}"/>
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">Description</f:facet>
+										<h:outputText value="#{groupe.description}"/>
+									</rich:column>
+									<rich:column>
+										<a4j:commandLink render="editGroupPanel" execute="#{groupesAction.edit(groupe.id)}">
+											<h:graphicImage styleClass="logo" value="resources/img/edit.png" />
+										</a4j:commandLink>
+									</rich:column>
+								</rich:dataTable>
+							</rich:panel>
 						<br />
-						<h:commandLink value="Ajouter un groupe" action="#{groupesAction.add()}"/>
+						<a4j:commandLink value="Ajouter un groupe" render="addGroupPanel" execute="#{groupesAction.add()}"/>
 					</h:panelGroup>
 					
 					<h:panelGroup>
 						<!-- edition -->
-						<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition}">
-							<h:panelGrid columns="2">
-							
-								<h:outputLabel value="Nom :" for="groupeNom" />
+						<a4j:outputPanel id="editGroupPanel" layout="block">
+							<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition}">
 								<h:panelGrid columns="2">
-									<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom">
-										<f:validateRequired />
-										<f:validateLength minimum="3" maximum="25" />
-									</h:inputText>
-									<h:message styleClass="errorMsg" for="groupeNom" />
-								</h:panelGrid>
 								
-								<h:outputLabel value="Description :" for="groupeDescription" />
-								<h:panelGrid columns="2">
-									<h:inputTextarea value="#{groupesAction.groupeEnEdition.description}" id="groupeDescription" required="true" requiredMessage="La description est obligatoire" />
-									<h:message styleClass="errorMsg" for="groupeDescription" />
+									<h:outputLabel value="Nom :" for="groupeNom" />
+									<h:panelGrid columns="2">
+										<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom">
+											<f:validateRequired />
+											<f:validateLength minimum="3" maximum="25" />
+										</h:inputText>
+										<h:message styleClass="errorMsg" for="groupeNom" />
+									</h:panelGrid>
+									
+									<h:outputLabel value="Description :" for="groupeDescription" />
+									<h:panelGrid columns="2">
+										<h:inputTextarea value="#{groupesAction.groupeEnEdition.description}" id="groupeDescription" required="true" requiredMessage="La description est obligatoire" />
+										<h:message styleClass="errorMsg" for="groupeDescription" />
+									</h:panelGrid>
+																
+									<a4j:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
+									<a4j:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
+	
 								</h:panelGrid>
-															
-								<h:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
-								<h:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
-
-							</h:panelGrid>
-						</rich:panel>
+							</rich:panel>
+						</a4j:outputPanel>
 
 						<!-- Ajout d'un groupe -->
-						<rich:panel header="Ajout d'un groupe" rendered="#{not empty groupesAction.groupeEnAddition}">
-							<h:panelGrid columns="2">
-								<h:outputLabel value="Nom :" for="groupeToAddNom" />
-								<h:panelGrid columns="2">								
-									<h:inputText value="#{groupesAction.groupeEnAddition.nom}" id="groupeToAddNom">
-										<f:validateRequired />
-										<f:validateLength minimum="3" maximum="25" />
-									</h:inputText>
-									<h:message styleClass="errorMsg" for="groupeToAddNom" />
+						<a4j:outputPanel id="addGroupPanel" layout="block">
+							<rich:panel header="Ajout d'un groupe" rendered="#{not empty groupesAction.groupeEnAddition}">
+								<h:panelGrid columns="2">
+									<h:outputLabel value="Nom :" for="groupeToAddNom" />
+									<h:panelGrid columns="2">								
+										<h:inputText value="#{groupesAction.groupeEnAddition.nom}" id="groupeToAddNom">
+											<f:validateRequired />
+											<f:validateLength minimum="3" maximum="25" />
+										</h:inputText>
+										<h:message styleClass="errorMsg" for="groupeToAddNom" />
+									</h:panelGrid>
+									
+									<h:outputLabel value="Description :" for="groupeToAddDescription" />
+									<h:panelGrid columns="2">								
+										<h:inputTextarea value="#{groupesAction.groupeEnAddition.description}" id="groupeToAddDescription" required="true" requiredMessage="La description est obligatoire"/>
+										<h:message styleClass="errorMsg" for="groupeToAddDescription" />								
+									</h:panelGrid>
+																
+									<h:commandButton value="Valider" action="#{groupesAction.validerAdd()}" />
+									<h:commandButton value="Annuler" action="#{groupesAction.annulerAdd()}" immediate="true"/>
 								</h:panelGrid>
-								
-								<h:outputLabel value="Description :" for="groupeToAddDescription" />
-								<h:panelGrid columns="2">								
-									<h:inputTextarea value="#{groupesAction.groupeEnAddition.description}" id="groupeToAddDescription" required="true" requiredMessage="La description est obligatoire"/>
-									<h:message styleClass="errorMsg" for="groupeToAddDescription" />								
-								</h:panelGrid>
-															
-								<h:commandButton value="Valider" action="#{groupesAction.validerAdd()}" />
-								<h:commandButton value="Annuler" action="#{groupesAction.annulerAdd()}" immediate="true"/>
-							</h:panelGrid>
-						</rich:panel>
+							</rich:panel>
+						</a4j:outputPanel>
 					</h:panelGroup>
 					
 				</h:panelGrid>

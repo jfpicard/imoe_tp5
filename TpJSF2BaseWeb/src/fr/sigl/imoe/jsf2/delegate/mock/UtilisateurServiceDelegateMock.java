@@ -86,8 +86,6 @@ public class UtilisateurServiceDelegateMock implements UtilisateurServiceDelegat
 			userToSave = new Utilisateur();
 			userToSave.setId(identifiant++);
 		}
-		System.out.println(utilisateur.getLogin());
-		System.out.println(utilisateur.getPassword());
 		userToSave.setLogin(utilisateur.getLogin());
 		userToSave.setPassword(utilisateur.getPassword());
 		userToSave.setEmail(utilisateur.getEmail());

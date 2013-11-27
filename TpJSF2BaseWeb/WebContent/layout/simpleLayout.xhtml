@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"	
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:insert name="metadata"/>
@@ -10,14 +12,23 @@
 	</title>
 </h:head>
 <h:body>
-    <h:outputStylesheet library="css" name="style.css" />
+	
+	<h:outputStylesheet library="css" name="style.css" />
+	<a4j:status>
+		<f:facet name="start">
+			<h:graphicImage value="reources/img/loading.gif" alt="Chargement en cours" />
+		</f:facet>
+	</a4j:status>
+	<h:message globalOnly="true" />
+	
     <h:form>
+    
        <h:panelGroup styleClass="header" layout="block">
            <ui:insert name="header" />
        </h:panelGroup>
+       
        <h:panelGroup styleClass="content" layout="block">
 <!--            <h:messages /> -->
-
            <ui:insert name="content" />
        </h:panelGroup>
 
