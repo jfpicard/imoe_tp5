@@ -15,6 +15,8 @@ public class Utilisateur implements Serializable
 	 * Generated serial UID.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
 
 	private String login;
 	
@@ -23,45 +25,65 @@ public class Utilisateur implements Serializable
 	private String email;
 	
 	private List<Groupe> groupes;
+	
+	public Integer getId() 
+	{
+		return id;
+	}
 
-	public String getLogin() {
+	public void setId(Integer id) 
+	{
+		this.id = id;
+	}
+
+	public String getLogin() 
+	{
 		return login;
 	}
 
-	public void setLogin(String login) {
+	public void setLogin(String login) 
+	{
 		this.login = login;
 	}
 
-	public String getPassword() {
+	public String getPassword() 
+	{
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password) 
+	{
 		this.password = password;
 	}
 
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
 
-	public List<Groupe> getGroupes() {
+	public List<Groupe> getGroupes() 
+	{
 		return groupes;
 	}
 
-	public void setGroupes(List<Groupe> groupes) {
+	public void setGroupes(List<Groupe> groupes) 
+	{
 		this.groupes = groupes;
 	}
 
-	public static long getSerialversionuid() {
+	public static long getSerialversionuid() 
+	{
 		return serialVersionUID;
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode() 
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
@@ -69,7 +91,8 @@ public class Utilisateur implements Serializable
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -77,10 +100,12 @@ public class Utilisateur implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		Utilisateur other = (Utilisateur) obj;
-		if (login == null) {
+		if (login == null) 
+		{
 			if (other.login != null)
 				return false;
-		} else if (!login.equals(other.login))
+		} 
+		else if (!login.equals(other.login))
 			return false;
 		return true;
 	}

@@ -8,23 +8,105 @@
 	template="/layout/simpleLayout.xhtml">
 
 	<ui:define name="header">
-		<h:graphicImage styleClass="logo" value="resources/img/logo.png"
-			height="70" />
-		<h:outputText
-			value="Application d'administration de comptes utilisateurs" />
+		<h:graphicImage styleClass="logo" value="resources/img/logo.png" height="70" />
+		<h:outputText value="Application d'administration de comptes utilisateurs" />
 	</ui:define>
 
 	<ui:define name="content">
 		<rich:tabPanel>
 			<rich:tab header="Utilisateurs">
 				<!-- Panel pour la gestion des utilisateurs -->
+				<h:panelGrid columns="2" styleClass="panelContent">
+				
+					<h:panelGroup>
+					<!-- Liste des utilisateurs -->
+						<rich:panel header="liste des utilisateurs">
+							<rich:dataTable var="utilisateur" value="#{utilisateursAction.utilisateurs}">
+								<rich:column>
+									<f:facet name="header">Login</f:facet>
+									<h:outputText value="#{utilisateur.login}"/>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Email</f:facet>
+									<h:outputText value="#{utilisateur.email}"/>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Groupes</f:facet>
+									<ui:repeat var="g" value="#{utilisateur.groupes}">
+										<h:outputText value="#{g.nom}"/><br />
+									</ui:repeat>
+								</rich:column>
+								<rich:column>
+									<h:commandLink action="#{utilisateursAction.edit(utilisateur.id)}">
+										<h:graphicImage styleClass="logo" value="resources/img/edit.png" />
+									</h:commandLink>
+								</rich:column>
+							</rich:dataTable>
+						</rich:panel>
+						<br />
+						<h:commandLink value="Ajouter un utilisateur" action="#{utilisateursAction.add()}"/>
+					</h:panelGroup>
+					
+					<h:panelGroup>
+					<!-- Edition des utilisateurs -->
+						<rich:panel header="Edition d'un utilisateur" rendered="#{not empty utilisateursAction.utilisateurEnEdition}">
+							<h:outputLabel value="Login :" for="userLogin" />
+							<h:inputText value="#{utilisateursAction.utilisateurEnEdition.login}" id="userLogin" />
+							<br />
+							
+							<h:outputLabel value="Password :" for="userPassword"/>
+							<h:inputSecret value="#{utilisateursAction.utilisateurEnEdition.password}" id="userPassword"/>
+							<br />
+							
+							<h:outputLabel value="Email :" for="userEmail"/>
+							<h:inputText value="#{utilisateursAction.utilisateurEnEdition.email}" id="userEmail"/>
+							<br />
+							
+							<h:outputLabel value="Groupes :" for="userGroupes" />
+							<h:selectManyListbox value="#{utilisateursAction.utilisateurEnEdition.groupes}" id="userGroupes">
+								<f:selectItems value="#{groupesAction.groupes}" var="g" itemLabel="#{g.nom}" itemValue="#{g}"/>	
+								<f:converter converterId="groupeConverter"/>
+							</h:selectManyListbox>
+							<br />
+							
+							<h:commandButton value="Valider" action="#{utilisateursAction.validerEdition()}" />
+							<h:commandButton value="Annuler" action="#{utilisateursAction.annulerEdition()}" immediate="true"/>
+						</rich:panel>
+						
+						<!-- Ajout d'un utilisateur -->
+						<rich:panel header="Ajout d'un utilisateur" rendered="#{not empty utilisateursAction.utilisateurEnAddition}">
+							<h:outputLabel value="Login :" for="userToAddLogin" />
+							<h:inputText value="#{utilisateursAction.utilisateurEnAddition.login}" id="userToAddLogin" />
+							<br />
+							
+							<h:outputLabel value="Password :" for="userToAddPassword"/>
+							<h:inputSecret value="#{utilisateursAction.utilisateurEnAddition.password}" id="userToAddPassword"/>
+							<br />
+							
+							<h:outputLabel value="Email :" for="userToAddEmail"/>
+							<h:inputText value="#{utilisateursAction.utilisateurEnAddition.email}" id="userToAddEmail"/>
+							<br />
+							
+							<h:outputLabel value="Groupes :" for="userToAddGroupes" />
+							<h:selectManyListbox value="#{utilisateursAction.utilisateurEnAddition.groupes}" id="userToAddGroupes">
+								<f:selectItems value="#{groupesAction.groupes}" var="g" itemLabel="#{g.nom}" itemValue="#{g}"/>	
+								<f:converter converterId="groupeConverter"/>
+							</h:selectManyListbox>
+							<br />
+							
+							<h:commandButton value="Valider" action="#{utilisateursAction.validerAdd()}" />
+							<h:commandButton value="Annuler" action="#{utilisateursAction.annulerAdd()}" immediate="true"/>
+						</rich:panel>
+					</h:panelGroup>
+				
+				</h:panelGrid>
 			</rich:tab>
 
 			<rich:tab header="Groupes">
 				<h:panelGrid columns="2" styleClass="panelContent">
 					
 					<h:panelGroup>
-						<!-- liste -->
+						<!-- Liste des groupes -->
 						<rich:panel header="liste des groupes">
 							<rich:dataTable var="groupe" value="#{groupesAction.groupes}">
 								<rich:column>
@@ -43,7 +125,7 @@
 							</rich:dataTable>
 						</rich:panel>
 						<br />
-						<h:commandLink value="Ajouter un groupe" />
+						<h:commandLink value="Ajouter un groupe" action="#{groupesAction.add()}"/>
 					</h:panelGroup>
 					
 					<h:panelGroup>
@@ -51,17 +133,35 @@
 						<rich:panel header="Edition d'un groupe" rendered="#{not empty groupesAction.groupeEnEdition}">
 							<h:outputLabel value="Nom :" for="groupeNom" />
 							<h:inputText value="#{groupesAction.groupeEnEdition.nom}" id="groupeNom" />
+							<br/>
+							
 							<h:outputLabel value="Description :" for="groupeDescription" />
 							<h:inputTextarea value="#{groupesAction.groupeEnEdition.description}" id="groupeDescription" />
-							
+							<br />
+														
 							<h:commandButton value="Valider" action="#{groupesAction.validerEdition()}" />
 							<h:commandButton value="Annuler" action="#{groupesAction.annulerEdition()}" immediate="true"/>
+						</rich:panel>
+
+						<!-- Ajout d'un groupe -->
+						<rich:panel header="Ajout d'un groupe" rendered="#{not empty groupesAction.groupeEnAddition}">
+							<h:outputLabel value="Nom :" for="groupeToAddNom" />
+							<h:inputText value="#{groupesAction.groupeEnAddition.nom}" id="groupeToAddNom" />
+							<br/>
+							
+							<h:outputLabel value="Description :" for="groupeToAddDescription" />
+							<h:inputTextarea value="#{groupesAction.groupeEnAddition.description}" id="groupeToAddDescription" />
+							<br />
+														
+							<h:commandButton value="Valider" action="#{groupesAction.validerAdd()}" />
+							<h:commandButton value="Annuler" action="#{groupesAction.annulerAdd()}" immediate="true"/>
 						</rich:panel>
 					</h:panelGroup>
 					
 				</h:panelGrid>
 			</rich:tab>
 		</rich:tabPanel>
+		
 	</ui:define>
 
 	<ui:define name="footer">

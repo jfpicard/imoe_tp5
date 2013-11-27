@@ -9,7 +9,7 @@ public interface GroupeServiceDelegate extends Serializable
 {
 	List<Groupe> listerTousGroupe();
 	
-	Groupe retrouverGroupePParId(Integer Id);
+	Groupe retrouverGroupeParId(Integer Id);
 	
 	Groupe retrouverGroupeParNom(String nom);
 	

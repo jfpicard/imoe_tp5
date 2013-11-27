@@ -9,6 +9,8 @@ public interface UtilisateurServiceDelegate extends Serializable
 {
 	List<Utilisateur> ListerTousUtilisateurs();
 	
+	Utilisateur retrouverUtilisateurParId(Integer Id);
+	
 	Utilisateur retrouverUtilisateurParLogin(String login);
 	
 	Utilisateur sauvegarderUtilisateur(Utilisateur utilisateur);

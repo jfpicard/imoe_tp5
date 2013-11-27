@@ -3,5 +3,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://jboss.org/schema/cdi/beans_1_0.xsd">
 	<alternatives>
 		<class>fr.sigl.imoe.jsf2.delegate.mock.GroupeServiceDelegateMock</class>
+		<class>fr.sigl.imoe.jsf2.delegate.mock.UtilisateurServiceDelegateMock</class>
 	</alternatives>
 </beans>

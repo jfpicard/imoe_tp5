@@ -36,12 +36,11 @@ public class GroupeServiceDelegateMock implements GroupeServiceDelegate
 	@Override
 	public List<Groupe> listerTousGroupe() 
 	{
-		// TODO Auto-generated method stub
 		return groupes;
 	}
 
 	@Override
-	public Groupe retrouverGroupePParId(Integer Id) 
+	public Groupe retrouverGroupeParId(Integer Id) 
 	{
 		for (Groupe groupe : groupes) 
 		{
@@ -50,7 +49,6 @@ public class GroupeServiceDelegateMock implements GroupeServiceDelegate
 				return groupe;
 			}
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -74,7 +72,7 @@ public class GroupeServiceDelegateMock implements GroupeServiceDelegate
 		Groupe groupeASauvegarder = null;
 		if (groupe.getId() != null)
 		{
-			groupeASauvegarder = retrouverGroupePParId(groupe.getId());
+			groupeASauvegarder = retrouverGroupeParId(groupe.getId());
 			if (groupeASauvegarder == null)
 			{
 				throw new IllegalStateException("Edition d'un groupe inexistant dans le bouchon");
